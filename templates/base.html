@@ -1,5 +1,5 @@
 {% load static %}<!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <title>{% block title %}Django Boards{% endblock %}</title>
@@ -14,8 +14,19 @@
     <div class="container">
         <!-- ajusta/aplica ao navbar a classe container, posicionando-o na tela conforme os outros itens-->
         <a class="navbar-brand" href="{% url 'home' %}">Django Boards</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ma:"
+                <span class="navbar-toggler-icon"></span>
+    </button>
+        <div class="collapse navbar-collapse" id="mainMenu">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                <a class="nav-link" href="#">{{ user.username }}</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
+
 <div class="container">
     <ol class="breadcrumb my-4">
         {% block breadcrumb %}

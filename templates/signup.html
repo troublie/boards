@@ -5,7 +5,7 @@
     <h2>Sign up</h2>
     <form method="post" novalidate>
         {% csrf_token %} <!-- inclui o cross forgery protect -->
-        {{ form.as_p }}
+        {% include 'includes/form.html' %} <!-- incluido após o commit para deixar mais "bonito". -->
         <button type="submit" class="btn btn-primary">Create an account</button>
     </form>
 </div>

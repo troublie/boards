@@ -1,6 +1,6 @@
 {% load widget_tweaks %}
 
-{% for field in form %}
+{% for field in form %} <!-- para cada campo no attr FORM ele vai seguir uma logica e aplicar o CSS -->
 <div class="form-group">
     {{ field.label_tag }}
 
@@ -21,7 +21,7 @@
 
     {% if field.help_text %}
     <small class="form-text text-muted">
-        {{ field.help_text }}
+        {{ field.help_text|safe }} <!-- o safe é novo, ele permite que caracters especiais sejam renderizados -->
     </small>
     {% endif %}
 </div>

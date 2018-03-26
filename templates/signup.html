@@ -1,6 +1,14 @@
 {% extends 'base.html' %}
 
-{% block content %}
+{% block body %} <!-- aqui anteriormente BLOCK CONTENT, alterou para BLOCK BODY após envelopar tudo no base.html -->
+<div class="container">
     <h2>Sign up</h2>
-{% endblock %}
+    <form method="post" novalidate>
+        {% csrf_token %} <!-- inclui o cross forgery protect -->
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Create an account</button>
+    </form>
+</div>
+{% endblock body %} <!-- boa prática fechar o endblock com o nome correspondente -->
 
+<!-- daqui vamos para criação do formulário de signup/cadastro com a form name UserCreationForm, do Django -->

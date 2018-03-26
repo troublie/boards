@@ -2,12 +2,14 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
     <title>{% block title %}Django Boards{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/app.css' %}">
+    {% block stylesheet %} {% endblock stylesheet %} <!-- HERE (alteração nova) -->
 </head>
 <body>
+{% block body %} <!-- HERE (alteração nova) -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         <!-- ajusta/aplica ao navbar a classe container, posicionando-o na tela conforme os outros itens-->
@@ -17,10 +19,15 @@
 <div class="container">
     <ol class="breadcrumb my-4">
         {% block breadcrumb %}
-        {% endblock %}
+        {% endblock breadcrumb %}
     </ol>
     {% block content %}
-    {% endblock %}
+    {% endblock content %}
 </div>
+{% endblock body %} <!-- HERE (alteração nova) -->
 </body>
 </html>
+
+<!-- aqui é adicionado o block BODY que engloba os breadcrumb e content, é um wrapper que envelopa tudo, para podermos
+reutilizar somente usando o block BODY. Daqui vamos para o signup.html // corrigindo, aparentemente ele cria um block
+novo e dentro dele não é aplicado o bradcrumb e content. É como se eles fossem removidos -->

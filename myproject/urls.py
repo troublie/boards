@@ -18,9 +18,11 @@ from django.urls import path
 from boards import views
 from django.conf.urls import url
 from django.contrib import admin
+from accounts import views as accounts_views  # o "as" define um alias/apelido, pois senão o views.nome ia colidir com o views. do BOARDS.
 
 urlpatterns = [
     url(r'^$', views.home, name='home'),
+    url(r'^signup/$', accounts_views.signup, name='signup'), #URL do inicio da parte 3 - autenticação e login
     url(r'^boards/(?P<pk>\d+)/$', views.board_topics, name='board_topics'),
     url(r'^boards/(?P<pk>\d+)/new/$', views.new_topic, name='new_topic'),
     path('admin/', admin.site.urls),

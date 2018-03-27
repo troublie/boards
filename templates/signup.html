@@ -1,15 +1,8 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends 'base_accounts.html' %}
 
-{% block stylesheet %}
-<link rel="stylesheet" href="{% static 'css/accounts.css' %}">
-{% endblock stylesheet %}
+{% block title %}Sign up to Django Boards{% endblock %}
 
-{% block body %} <!-- aqui anteriormente BLOCK CONTENT, alterou para BLOCK BODY após envelopar tudo no base.html -->
-<div class="container">
-    <h1 class="text-center logo my-4">
-        <a href="{% url 'home' %}">Django Boards</a>
-    </h1>
+{% block content %}
     <div class="row justify-content-center">
         <div class="col-lg-8 col-md-10 col-sm-12">
             <div class="card">
@@ -27,7 +20,4 @@
             </div>
         </div>
     </div>
-</div>
-{% endblock body %} <!-- boa prática fechar o endblock com o nome correspondente -->
-
-<!-- daqui vamos para criação do formulário de signup/cadastro com a form name UserCreationForm, do Django -->
+{% endblock content %}

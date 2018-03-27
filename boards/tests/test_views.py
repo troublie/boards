@@ -2,9 +2,9 @@ from django.urls import reverse_lazy
 from django.urls import resolve
 from django.test import TestCase
 
-from boards.forms import NewTopicForm
-from .views import home, board_topics, new_topic
-from .models import Board, Topic, Post
+from ..forms import NewTopicForm
+from ..views import home, board_topics, new_topic
+from ..models import Board, Topic, Post
 
 
 class HomeTests(TestCase):

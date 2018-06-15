@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import Count
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
@@ -10,10 +11,12 @@ from .forms import NewTopicForm, PostForm
 from django.views.generic import UpdateView
 from django.utils import timezone
 
+
 class BoardListView(ListView):
     model = Board
-    context_object_name = 'boards' #permite que no template object vire Board.
+    context_object_name = 'boards'  # permite que no template object vire Board.
     template_name = 'home.html'
+
 
 def home(request):
     boards = Board.objects.all()
@@ -22,7 +25,21 @@ def home(request):
 
 def board_topics(request, pk):
     board = get_object_or_404(Board, pk=pk)
-    topics = board.topics.order_by('-last_update').annotate(replies=Count('posts') - 1)
+    queryset = board.topics.order_by('-last_update').annotate(replies=Count('posts') - 1)
+    page = request.GET.get('page', 1) # o 1 é a pagina que ele inicia
+
+    paginator = Paginator(queryset, 20) # o 20 é o número de objetos (topicos) por página
+
+    try:
+        topics = paginator.page(page)
+    except PageNotAnInteger:
+        # fallback to the first page
+        topics = paginator.page(1)
+    except EmptyPage:
+        # probably the user tried to add a page number
+        # in the url, so we fallback to the last page
+        topics = paginator.page(paginator.num_pages)
+
     return render(request, 'topics.html', {'board': board, 'topics': topics})
 
 

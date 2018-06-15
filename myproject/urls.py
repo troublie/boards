@@ -24,7 +24,9 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     # url(r'^$', views.home, name='home'), #ANTIGA, FBV
-    url(r'^$', views.BoardListView.as_view(), name='home'), #NOVA, GCBV
+    url(r'^$', views.BoardListView.as_view(), name='home'),  # NOVA, GCBV
+    url(r'^boards/(?P<pk>\d+)/$', views.TopicListView.as_view(), name='board_topics'),  # GCBV DO TOPIC LIST PAGINATED
+    url(r'^boards/(?P<pk>\d+)/topics/(?P<topic_pk>\d+)/$', views.PostListView.as_view(), name='topic_posts'), # GCBV DO POST LIST
     url(r'^login/$', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     url(r'^accounts/login/$', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     url(r'^signup/$', accounts_views.signup, name='signup'),  # URL do inicio da parte 3 - autenticação e login
